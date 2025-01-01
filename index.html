@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>宝可梦百科搜索</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #f8f8f8;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .search-area {
+      background-color: #ee1515;
+      flex-shrink: 0;
+      display: flex; /* 默认显示搜索区域 */
+      justify-content: center;
+      padding: 0.2rem;
+    }
+
+    .search-input {
+      width: 0;
+      flex-grow: 1;
+      max-width: 500px;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      font-size: 0.8rem;
+    }
+
+    .search-button {
+      background-color: #ee1515;
+      color: white;
+      border: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .search-button:hover {
+      background-color: #c71010;
+    }
+
+    .iframe-container {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="search-area">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索">
+      <button id="searchButton" class="search-button">搜索</button>
+    </div>
+    <div class="iframe-container">
+      <iframe id="wikiFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const wikiFrame = document.getElementById('wikiFrame');
+
+    searchButton.addEventListener('click', () => {
+      const query = searchInput.value;
+      if (query) {
+        wikiFrame.src = `https://wiki.52poke.com/zh-hans/${encodeURIComponent(query)}`;
+      }
+    });
+
+    searchInput.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        searchButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
